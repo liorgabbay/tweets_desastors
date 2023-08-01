@@ -48,7 +48,11 @@
     2.complete test preprocess
     
 """
+
 ######## imports ########
+import os
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import pandas as pd
 from nltk.corpus import stopwords
 import re
@@ -56,8 +60,6 @@ from keras.utils import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from keras.models import Sequential
 from keras.layers import Embedding, LSTM
-
-
 
 ########## globals ##########
 tokenizer = Tokenizer()
@@ -205,7 +207,7 @@ def text_test_preprocess(test_data):
     """
     test_data = clean_text(test_data)
     # convert the text to numrical by the mapping of the train set
-    convertNumerical = tokenizer.texts_to_sequences(test_data['test'])
+    convertNumerical = tokenizer.texts_to_sequences(test_data['text'])
     max_sequence_length = 50
     padded_sequences = pad_sequences(convertNumerical, maxlen=max_sequence_length, padding='post', truncating='post')
     # predict by the train set model
