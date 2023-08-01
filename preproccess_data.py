@@ -381,6 +381,3 @@ def preprocess_test(test_data: pd.DataFrame, avg_train):
     test_data = test_data.reindex(columns=avg_train.index, fill_value=0)
     return test_data
 
-
-if __name__ == '__main__':
-    print("hello")
