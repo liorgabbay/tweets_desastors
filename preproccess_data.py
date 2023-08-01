@@ -50,6 +50,7 @@
 """
 
 ######## imports ########
+
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -131,7 +132,7 @@ def keyword_preprocess(data: pd.DataFrame):
     :return: pandas.DataFrame
         DataFrame with the 'keyword' column preprocessed using get dummies.
     """
-    data = pd.get_dummies(data, columns=["keyword"])
+    data = pd.get_dummies(data, columns=["keyword"],dtype=int)
     return data
 
 
