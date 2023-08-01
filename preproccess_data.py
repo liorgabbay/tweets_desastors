@@ -36,6 +36,8 @@
             
     Globals: 
     1. tokenizer
+    2. stop_words_set
+    3. model
     
     drop columns: 
     1. id 
@@ -47,17 +49,15 @@
     
 """
 ######## imports ########
-import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
 import re
 from keras.utils import pad_sequences
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from keras.preprocessing.text import Tokenizer
 from keras.models import Sequential
 from keras.layers import Embedding, LSTM
 
-#########################
+
 
 ########## globals ##########
 tokenizer = Tokenizer()
@@ -65,7 +65,7 @@ stop_words_set = set(stopwords.words('english'))
 model = Sequential()
 
 
-#############################
+##### preprocess code ######
 
 def split_data(data: str):
     """
@@ -356,7 +356,7 @@ def train_preprocess(train_data: pd.DataFrame, y_train: pd.Series):
     train_y = data.loc[:, y_train.name]
     train_X = data.drop(columns=y_train.name)
     avg = train_X.mean(axis=0)
-    return train_X, train_y,avg
+    return train_X, train_y, avg
 
 
 def preprocess_test(test_data: pd.DataFrame, avg_train):
@@ -386,4 +386,3 @@ def preprocess_test(test_data: pd.DataFrame, avg_train):
     # match the column of the test to the column of the train
     test_data = test_data.reindex(columns=avg_train.index, fill_value=0)
     return test_data
-
