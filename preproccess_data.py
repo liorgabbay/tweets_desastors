@@ -14,7 +14,7 @@
             convert a csv file to DataFrame
             
         3. train_preprocess: 
-            imply all th preprocess function on the train data
+            imply all preprocess function on the train data
             
         4. drop_dup_and_columns: 
             drop duplicate sample and non relevant columns.
@@ -22,11 +22,17 @@
         5.keyword_preprocess: 
             preprocess relevant to  keyword column
             
-        6.text_preprocess
-            preprocess relevant to text column
+        6.text_train_preprocess
+            preprocess relevant to text column on the train data
+        
+        7.text_test_preprocess
+            preprocess relevant to text column on the test data
             
         7. clean text 
             clean the text from symbols space and etc
+        
+        8.preprocess_test: 
+            imply all preprocess function on the test data
             
     Globals: 
     1. tokenizer
@@ -36,7 +42,7 @@
     2. location 
     
     TODO: 
-    1. check if it good to delete the location columns
+    1.check if it good to delete the location columns
     2.complete test preprocess
     
 """
@@ -55,7 +61,7 @@ from keras.layers import Embedding, LSTM
 
 ########## globals ##########
 tokenizer = Tokenizer()
-stop_words = set(stopwords.words('english'))
+stop_words_set = set(stopwords.words('english'))
 model = Sequential()
 
 
@@ -127,7 +133,7 @@ def keyword_preprocess(data: pd.DataFrame):
     return data
 
 
-def text_preprocess(data: pd.DataFrame):
+def text_train_preprocess(data: pd.DataFrame):
     """
         Preprocesses the text data in the 'text' column of the given DataFrame.
 
@@ -346,9 +352,9 @@ def train_preprocess(train_data: pd.DataFrame, y_train: pd.Series):
     data = keyword_preprocess(data)
 
     # preprocess on the text column
-    data = text_preprocess(data)
-    train_y = data.loc[:, y_train.columns]
-    train_X = data.drop(columns=y_train.columns)
+    data = text_train_preprocess(data)
+    train_y = data.loc[:, y_train.name]
+    train_X = data.drop(columns=y_train.name)
     avg = train_X.mean(axis=0)
     return train_X, train_y,avg
 
