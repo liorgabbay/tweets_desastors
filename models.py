@@ -8,6 +8,20 @@ from preproccess_data import train_preprocess, preprocess_test
 
 def KNN_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFrame, y_validation: pd.DataFrame,
               loss_list: list):
+    """
+    Trains a K-Nearest Neighbors (KNN) classifier on the given training data, makes predictions on the validation data,
+    and calculates the accuracy score.
+
+    Parameters:
+        X_train (pd.DataFrame): pandas DataFrame containing the training features.
+        y_train (pd.Series): pandas Series containing the target labels for the training data.
+        X_validation (pd.DataFrame): pandas DataFrame containing the validation features.
+        y_validation (pd.DataFrame): pandas Series containing the target labels for the validation data.
+        loss_list (list): A list to which the name of the model and its accuracy will be appended.
+
+    Returns:
+        None: The accuracy score of the KNN model will be appended to the loss_list.
+    """
     knn = KNeighborsClassifier()
     knn.fit(X_train, y_train)
     y_pred = knn.predict(X_validation)
@@ -18,6 +32,20 @@ def KNN_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFr
 def decision_tree_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFrame,
                         y_validation: pd.DataFrame,
                         loss_list: list):
+    """
+    Trains a Decision Tree classifier on the given training data, makes predictions on the validation data,
+    and calculates the accuracy score.
+
+    Parameters:
+        X_train (pd.DataFrame): pandas DataFrame containing the training features.
+        y_train (pd.Series): pandas Series containing the target labels for the training data.
+        X_validation (pd.DataFrame): pandas DataFrame containing the validation features.
+        y_validation (pd.DataFrame): pandas Series containing the target labels for the validation data.
+        loss_list (list): A list to which the name of the model and its accuracy will be appended.
+
+    Returns:
+        None: The accuracy score of the Decision Tree model will be appended to the loss_list.
+    """
     tree_model = DecisionTreeClassifier()
     tree_model.fit(X_train, y_train)
     y_pred = tree_model.predict(X_validation)
@@ -28,6 +56,20 @@ def decision_tree_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation:
 def adaboost_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFrame,
                    y_validation: pd.DataFrame,
                    loss_list: list):
+    """
+    Trains an AdaBoost classifier on the given training data using Decision Tree as the base estimator,
+    makes predictions on the validation data, and calculates the accuracy score.
+
+    Parameters:
+        X_train (pd.DataFrame): pandas DataFrame containing the training features.
+        y_train (pd.Series): pandas Series containing the target labels for the training data.
+        X_validation (pd.DataFrame): pandas DataFrame containing the validation features.
+        y_validation (pd.DataFrame): pandas Series containing the target labels for the validation data.
+        loss_list (list): A list to which the name of the model and its accuracy will be appended.
+
+    Returns:
+        None: The accuracy score of the AdaBoost model will be appended to the loss_list.
+    """
     base_estimator = DecisionTreeClassifier(max_depth=1)
     adaboost_classifier = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=100, random_state=42)
     adaboost_classifier.fit(X_train, y_train)
