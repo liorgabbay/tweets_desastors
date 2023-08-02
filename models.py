@@ -250,18 +250,4 @@ if __name__ == '__main__':
     for model in model_accuracy:
         print(model[0], f"accuracy: {model[1]}")
 
-    model_names, accuracies = zip(*model_accuracy)
-    plt.figure(figsize=(10, 6))  # Set the size of the figure
-
-    # Create the bar graph
-    plt.bar(model_names, accuracies, color='blue')
-
-    # Add labels and title
-    plt.xlabel('Model Name')
-    plt.ylabel('Accuracy')
-    plt.title('Model Accuracy')
-
-    # Show the plot
-    plt.tight_layout()  # Adjust layout to prevent overlapping labels
-    plt.show()
 
