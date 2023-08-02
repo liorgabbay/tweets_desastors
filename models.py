@@ -173,6 +173,7 @@ def QDA_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFr
     accuracy = accuracy_score(y_validation, y_pred)
     loss_list.append(("QDA model", accuracy))
 
+
 def LDA_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFrame, y_validation: pd.DataFrame,
               loss_list: list):
     """
@@ -198,6 +199,8 @@ def LDA_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFr
     y_pred = qda.predict(X_test_scaled)
     accuracy = accuracy_score(y_validation, y_pred)
     loss_list.append(("LDA model", accuracy))
+
+
 def neural_network_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation: pd.DataFrame,
                          y_validation: pd.Series,
                          loss_list: list):
@@ -218,7 +221,7 @@ def neural_network_model(X_train: pd.DataFrame, y_train: pd.Series, X_validation
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_validation_scaled = scaler.transform(X_validation)
-    neural_net = MLPClassifier(hidden_layer_sizes=(100,50), max_iter=1000, random_state=42)
+    neural_net = MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=1000, random_state=42)
     neural_net.fit(X_train_scaled, y_train)
     y_pred = neural_net.predict(X_validation_scaled)
     accuracy = accuracy_score(y_validation, y_pred)
@@ -246,3 +249,19 @@ if __name__ == '__main__':
     neural_network_model(X_train, y_train, X_validation, y_validation, model_accuracy)
     for model in model_accuracy:
         print(model[0], f"accuracy: {model[1]}")
+
+    model_names, accuracies = zip(*model_accuracy)
+    plt.figure(figsize=(10, 6))  # Set the size of the figure
+
+    # Create the bar graph
+    plt.bar(model_names, accuracies, color='blue')
+
+    # Add labels and title
+    plt.xlabel('Model Name')
+    plt.ylabel('Accuracy')
+    plt.title('Model Accuracy')
+
+    # Show the plot
+    plt.tight_layout()  # Adjust layout to prevent overlapping labels
+    plt.show()
+
