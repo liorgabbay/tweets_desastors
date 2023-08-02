@@ -37,13 +37,19 @@ I had a fantastic experience working on the Twitter Disaster Tweet Classifier, m
 
 **Models result on validation set:**
 
-Knn model accuracy: 0.7519685039370079
-decision tree model accuracy: 0.6338582677165354
-adaboost model accuracy: 0.7047244094488189
-logistic regression model accuracy: 0.7506561679790026
-QDA model accuracy: 0.7349081364829396
-LDA model accuracy: 0.7454068241469817
-neural network model accuracy: 0.7086614173228346
+*Knn model accuracy*: 0.7519685039370079
+
+*decision tree model accuracy*: 0.6338582677165354
+
+*adaboost model accuracy*: 0.7047244094488189
+
+*logistic regression model accuracy*: 0.7506561679790026
+
+*QDA model accuracy*: 0.7349081364829396
+
+*LDA model accuracy*: 0.7454068241469817
+
+*neural network model accuracy*: 0.7086614173228346
 
 
 
