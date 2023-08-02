@@ -36,6 +36,7 @@ I had a fantastic experience working on the Twitter Disaster Tweet Classifier, m
 
 
 **Models result on validation set:**
+
 Knn model accuracy: 0.7519685039370079
 decision tree model accuracy: 0.6338582677165354
 adaboost model accuracy: 0.7047244094488189
