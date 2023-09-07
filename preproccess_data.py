@@ -158,18 +158,14 @@ def text_train_preprocess(data: pd.DataFrame):
     """
 
     data = clean_text(data)
-    # Step 1: Create Word-to-Index Mapping
     tokenizer.fit_on_texts(data['text'])
     word_to_index = tokenizer.word_index
 
-    # Step 2: Convert Text Data to Numerical Form
     numerical_sequences = tokenizer.texts_to_sequences(data['text'])
 
-    # Step 3: Padding or Truncating Sequences (Optional)
     max_sequence_length = 50
     padded_sequences = pad_sequences(numerical_sequences, maxlen=max_sequence_length, padding='post', truncating='post')
 
-    # Step 4: Load Pre-trained Embeddings (Optional)
     embedding_dim = 100  # Adjust this according to the desired embedding size
 
     # Build the Model with Training from Scratch Word Embeddings
@@ -178,6 +174,7 @@ def text_train_preprocess(data: pd.DataFrame):
 
     # Get word embeddings from the model
     word_embeddings = model.predict(padded_sequences)
+
     # Convert word embeddings to DataFrame
     column_titles = [f'embedding_{i}' for i in range(64)]
     word_embeddings_df = pd.DataFrame(word_embeddings, columns=column_titles)
